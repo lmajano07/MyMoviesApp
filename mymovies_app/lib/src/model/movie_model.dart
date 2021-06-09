@@ -66,7 +66,7 @@ class Movie {
 
   getPosterImg() {
     if (posterPath == null){
-      return 'https://media.istockphoto.com/vectors/no-image-available-sign-vector-id922962354?k=6&m=922962354&s=480x480&w=0&h=_KKNzEwxMkutv-DtQ4f54yA5nc39Ojb_KPvoV__aHyU=';
+      return 'https://www.escapeauthority.com/wp-content/uploads/2116/11/No-image-found.jpg';
     } else {
       return 'https://image.tmdb.org/t/p/w500/$posterPath';
     }
@@ -74,7 +74,7 @@ class Movie {
 
   getBackgroundImg() {
     if (backdropPath == null){
-      return 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png';
+      return 'https://www.escapeauthority.com/wp-content/uploads/2116/11/No-image-found.jpg';
     } else {
       return 'https://image.tmdb.org/t/p/w500/$backdropPath';
     }

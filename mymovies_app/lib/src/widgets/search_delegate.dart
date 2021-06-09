@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mymovies_app/src/model/movie_model.dart';
 
 import 'package:mymovies_app/src/services/movies_service.dart';
+import 'package:mymovies_app/src/theme/theme.dart';
 import 'package:mymovies_app/src/widgets/movie_detail.dart';
 
 class DataSearch extends SearchDelegate {
@@ -38,23 +39,42 @@ class DataSearch extends SearchDelegate {
     @override
     Widget buildResults(BuildContext context) {
       // Creates results to display
-      return Center(
-        child: Container(
-          height: 100.0,
-          width: 100.0,
-          color: Colors.blueAccent,
-          child: Text("data"),
-        ),
-      );
+      return Results(moviesService: moviesService, query: query);
     }
   
     @override
     Widget buildSuggestions(BuildContext context) {
     // Suggestions while typing
     if (query.isEmpty) {
-      return Container();
+      return Center(
+        child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 15.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Start typing to see results', style: Theme.of(context).textTheme.headline4, textAlign: TextAlign.center),
+            SizedBox(height: 40.0),
+            CircularProgressIndicator(color: myTheme.primaryColor)
+          ],
+        ),
+      ));
     }
+    return Results(moviesService: moviesService, query: query);
+  } 
+}
 
+class Results extends StatelessWidget {
+  const Results({
+    Key? key,
+    required this.moviesService,
+    required this.query,
+  }) : super(key: key);
+
+  final MoviesService moviesService;
+  final String query;
+
+  @override
+  Widget build(BuildContext context) {
     return FutureBuilder(
       future: moviesService.searchMovie(query),
       builder: (BuildContext context, AsyncSnapshot<List<Movie>> snapshot) {
@@ -62,40 +82,15 @@ class DataSearch extends SearchDelegate {
           final movies = snapshot.data;
           return  ListView(
             children: movies!.map((movie){
-              return Padding(
-                padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 5.0),
-                child: MovieDetail(movie),
-              );
+              return MovieDetail(movie);
             }).toList()
           );
         } else {
           return Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(color: myTheme.primaryColor),
           );
         }
       }  
     );
   }
-  
 }
-
-// Modelo de build suggestions
-// final listaSugerida = (query.isEmpty) 
-//                             ? peliculasRecientes 
-//                             : peliculas.where(
-//                               (p) => p.toLowerCase().startsWith(query.toLowerCase())
-//                             ).toList();
-
-//     return ListView.builder(
-//       itemCount: listaSugerida.length,
-//       itemBuilder: (context, i){
-//         return ListTile(
-//           leading: Icon(Icons.movie),
-//           title: Text(listaSugerida[i]),
-//           onTap: (){
-//             seleccion = listaSugerida[i];
-//             showResults(context);
-//           },
-//         );
-//       }
-//       );
