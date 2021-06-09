@@ -15,6 +15,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   UserService userService = new UserService();
+
+  // Model that will be sent to the API
   LoginRequestModel requestModel = new LoginRequestModel();
   
   String email = '';
@@ -201,9 +203,10 @@ class _LoginPageState extends State<LoginPage> {
       // Call the service
       userService.logIn(requestModel).then((value) {
         if (value.token!.isNotEmpty) {
+          // If the response brings a token it's saved and app continues to next page
           Navigator.pushReplacementNamed(context, 'home');
         } else {
-          showAlert(context, 'Email or password are incorrect');
+          showAlert(context, 'Email or password are incorrect\n${value.error}');
         }
       });
     }

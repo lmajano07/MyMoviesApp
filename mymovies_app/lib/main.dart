@@ -29,8 +29,9 @@ class MyApp extends StatelessWidget {
     final _preferences = new UserPreferences();
 
     return MaterialApp(
+      // Uncomment the line below to take away the debug label on the top right corner
+      // debugShowCheckedModeBanner: false,
       title: 'My Movies',
-      
       home: AnimatedSplashScreen(
         duration: 2000,
         splashTransition: SplashTransition.fadeTransition, 
@@ -42,12 +43,14 @@ class MyApp extends StatelessWidget {
         splashIconSize: 250,
         nextScreen: _preferences.token != '' ? HomePage() : LoginPage() // Cheks if there's a token
       ),
+      
       // Using routes to navigate through pages
       routes: {
         'login' : (BuildContext context) => LoginPage(),
         'home'  : (BuildContext context) => HomePage()
       },
       
+      // Set a custom theme
       theme: myTheme
     );
   }

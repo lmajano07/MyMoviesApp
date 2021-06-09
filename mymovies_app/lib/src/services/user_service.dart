@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+
 import 'package:mymovies_app/src/model/login_model.dart';
 
 import 'package:mymovies_app/src/shared_preferences/shared_preferences.dart';

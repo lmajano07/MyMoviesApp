@@ -17,7 +17,6 @@ class PopularMoviesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final _size = MediaQuery.of(context).size;
 
     _pageController.addListener(() {
@@ -25,6 +24,7 @@ class PopularMoviesList extends StatelessWidget {
         nextPage!();
       }
     });
+    
     return Container(
       height: _size.height * 0.75,
       child: ListView.builder(

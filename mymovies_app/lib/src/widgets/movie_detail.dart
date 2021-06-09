@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mymovies_app/src/model/movie_model.dart';
 import 'package:mymovies_app/src/theme/theme.dart';
 
+// Created a separeted widget so it can be used by the two pages (Home, Search)
 class MovieDetail extends StatelessWidget {
   final Movie movie;
 
@@ -13,7 +14,7 @@ class MovieDetail extends StatelessWidget {
     
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-      elevation: 10.0,
+      elevation: 15.0,
       margin: EdgeInsets.symmetric(vertical: 15.0, horizontal: 5.0),
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 5.0),
@@ -22,6 +23,7 @@ class MovieDetail extends StatelessWidget {
           children: [
             // Extracted widgets for more readability
             MovieTitle(movie: movie),
+            
             SizedBox(height: 10.0),
             
             Row(
@@ -36,6 +38,7 @@ class MovieDetail extends StatelessWidget {
               ]
             ),
             SizedBox(height: 10.0),
+            
             MovieOverview(movie: movie)
           ]
         )
@@ -157,7 +160,7 @@ class MovieOverview extends StatelessWidget {
       child: Text(
         movie.overview! == 'null' ? 'No overview...' : movie.overview!,
         overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.bodyText2,
-        maxLines: 3,
+        maxLines: 4, // Maximum lines to be displayed to save space and make the layout more stable
         textAlign: TextAlign.justify
       )
     );

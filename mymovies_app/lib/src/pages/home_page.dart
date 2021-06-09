@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:mymovies_app/src/services/movies_service.dart';
 import 'package:mymovies_app/src/shared_preferences/shared_preferences.dart';
+
 import 'package:mymovies_app/src/theme/theme.dart';
 import 'package:animate_do/animate_do.dart';
 
@@ -14,6 +15,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Call the function to fill the list at the start
     moviesService.getPopularMovies();
     
     return Scaffold(
@@ -24,6 +26,7 @@ class HomePage extends StatelessWidget {
             label: Text('Log out', style: TextStyle(color: Colors.white)),
             icon: Icon(Icons.logout_outlined, color: Colors.white),
             onPressed: () {
+              // On logout will delete the token
               _preferences.token = '';
               Navigator.pushReplacementNamed(context, 'login');
             }
@@ -33,6 +36,7 @@ class HomePage extends StatelessWidget {
             label: Text('Search', style: TextStyle(color: Colors.white)),
             icon: Icon(Icons.search, color: Colors.white),
             onPressed: () {
+              // Displays a search delegate
               showSearch(context: context, delegate: DataSearch());
             }
           )

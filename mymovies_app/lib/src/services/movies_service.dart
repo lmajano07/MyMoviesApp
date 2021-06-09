@@ -9,6 +9,7 @@ class MoviesService {
   // API KEY from TheMovieDB -- Can be replaced by yours
   String _apiKey   = 'ef2d0e038dc6f363ab4689d74d9eb029';
   String _url      = 'api.themoviedb.org';
+  // Language to display of the movie
   String _language = 'en-US';
 
   int _popularsPage = 0;
@@ -27,6 +28,8 @@ class MoviesService {
   }
 
   Future<List<Movie>> _processResponse(Uri url) async {
+    // Function designed to send the requests of the other functions
+
     final resp = await http.get(url);
     final decodedData = json.decode(resp.body);
 
@@ -65,6 +68,5 @@ class MoviesService {
     _loading = false;
 
     return response;
-
   }
 }
