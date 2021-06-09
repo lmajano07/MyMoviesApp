@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:mymovies_app/src/model/movie_model.dart';
+import 'package:mymovies_app/src/theme/theme.dart';
 
 class MovieDetail extends StatelessWidget {
   final Movie movie;
@@ -14,11 +16,13 @@ class MovieDetail extends StatelessWidget {
       elevation: 10.0,
       margin: EdgeInsets.symmetric(vertical: 15.0, horizontal: 5.0),
       child: Container(
+        padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 5.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             // Extracted widgets for more readability
             MovieTitle(movie: movie),
+            SizedBox(height: 10.0),
             
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -31,7 +35,7 @@ class MovieDetail extends StatelessWidget {
                 MovieDateVote(movie: movie)
               ]
             ),
-
+            SizedBox(height: 10.0),
             MovieOverview(movie: movie)
           ]
         )
@@ -125,11 +129,13 @@ class RowItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(icon),
+        Icon(icon, color: myTheme.primaryColor),
         SizedBox(width: 10.0),
         Text(
           '$text',
-          overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.subtitle1
+          overflow: TextOverflow.ellipsis, 
+          style: Theme.of(context).textTheme.subtitle2,
+          textAlign: TextAlign.center,
         )
       ]
     );

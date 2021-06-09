@@ -1,9 +1,9 @@
 import 'dart:ui';
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
 import 'package:mymovies_app/src/model/login_model.dart';
 import 'package:mymovies_app/src/services/user_service.dart';
+import 'package:animate_do/animate_do.dart';
 
 import 'package:mymovies_app/src/theme/theme.dart';
 import 'package:mymovies_app/src/widgets/alert.dart';
@@ -72,7 +72,10 @@ class _LoginPageState extends State<LoginPage> {
           padding: EdgeInsets.only(top: 70.0),
           child: Column(
             children: [
-              Icon(Icons.person_pin_circle, color: Colors.white, size: 100.0),
+              Hero(
+                tag: 'logo',
+                child: Image(height: size.height * 0.12, image: AssetImage('assets/img/logo_transparent.png'))
+              ),
               SizedBox(height: 10.0, width: double.infinity,),
               BounceInDown(child: Text('My Movies', style: TextStyle(color: Colors.white, fontSize: 38.0, fontWeight: FontWeight.bold)))
             ]
