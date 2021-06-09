@@ -17,13 +17,14 @@ class UserService {
 
     print(response.body);
 
+    var result = LoginResponseModel.fromJson(json.decode(response.body));
+    
     if (response.statusCode == 200) {
-      var result = LoginResponseModel.fromJson(json.decode(response.body));
       _preferences.token = result.token;
-      return result; 
-    } else {
-      print('malo');
-      return LoginResponseModel.fromJson(json.decode(response.body));
     }
+    else _preferences.token = '';
+    
+    return result;
+    
   }
 }

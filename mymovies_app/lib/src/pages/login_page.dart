@@ -150,9 +150,9 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               )
             )
-          ],
-        ),
-      ),
+          ]
+        )
+      )
     );
   }
 
@@ -179,17 +179,23 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _logIn() async {
+    // Create regEx
+    final mailCheck = new RegExp(r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
+    
     // Check if empty    
     if (email.length == 0 || password.length == 0) {
       showAlert(context, 'Blank spaces are not allowed');
-    // } else if (!email.contains('@') || !email.contains(other)) {
-
-    }
-    else {
+    
+    // Check for email's format
+    } else if (!mailCheck.hasMatch(email)) {
+      showAlert(context, 'Mail format is incorrect');
+    
+    } else {
       // Set data into the request model
       requestModel.email    = email;
       requestModel.password = password;
 
+      // Call the service
       userService.logIn(requestModel).then((value) {
         if (value.token!.isNotEmpty) {
           Navigator.pushReplacementNamed(context, 'home');

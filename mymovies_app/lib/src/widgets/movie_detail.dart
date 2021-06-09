@@ -26,7 +26,7 @@ class MovieDetail extends StatelessWidget {
                 
                 MovieImage(movie: movie, size: size),
                 
-                SizedBox(width: 5.0),
+                SizedBox(width: 15.0),
                 
                 MovieDateVote(movie: movie)
               ]
@@ -96,14 +96,14 @@ class MovieDateVote extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         RowItem(
-          text: movie.releaseDate == null || movie.releaseDate == '' ? 'Unkwnown' : 'Release date: ${movie.releaseDate}',
+          text: movie.releaseDate == null || movie.releaseDate == '' ? 'Unkwnown' : 'Release date\n${movie.releaseDate}',
           icon: Icons.calendar_today_outlined
         ),
 
-        SizedBox(height: 5.0),
+        SizedBox(height: 10.0),
         
         RowItem(
-          text: movie.voteAverage == null ? 'Unkwnown' : 'Average vote: ${movie.voteAverage.toString()}',
+          text: movie.voteAverage == null ? 'Unkwnown' : 'Average vote\n${movie.voteAverage.toString()}',
           icon: Icons.star_border
         )
       ]
@@ -126,6 +126,7 @@ class RowItem extends StatelessWidget {
     return Row(
       children: [
         Icon(icon),
+        SizedBox(width: 10.0),
         Text(
           '$text',
           overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.subtitle1
