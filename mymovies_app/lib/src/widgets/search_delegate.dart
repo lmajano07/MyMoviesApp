@@ -39,28 +39,40 @@ class DataSearch extends SearchDelegate {
     @override
     Widget buildResults(BuildContext context) {
       // Creates results to display
-      return Results(moviesService: moviesService, query: query);
+      if (query == '') return Results(moviesService: moviesService, query: query);
+      else return EmptyQueryWidget();
     }
   
     @override
     Widget buildSuggestions(BuildContext context) {
     // Suggestions while typing
     if (query.isEmpty) {
-      return Center(
-        child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Start typing to see results', style: Theme.of(context).textTheme.headline4, textAlign: TextAlign.center),
-            SizedBox(height: 40.0),
-            CircularProgressIndicator(color: myTheme.primaryColor)
-          ],
-        ),
-      ));
+      return EmptyQueryWidget();
     }
     return Results(moviesService: moviesService, query: query);
   } 
+}
+
+class EmptyQueryWidget extends StatelessWidget {
+  const EmptyQueryWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+      padding: EdgeInsets.symmetric(horizontal: 15.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('Start typing to see results', style: Theme.of(context).textTheme.headline4, textAlign: TextAlign.center),
+          SizedBox(height: 40.0),
+          CircularProgressIndicator(color: myTheme.primaryColor)
+        ],
+      ),
+    ));
+  }
 }
 
 class Results extends StatelessWidget {
